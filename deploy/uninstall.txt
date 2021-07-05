@@ -1,0 +1,8 @@
+How to use it
+
+$ ./uninstall.sh [parameters]
+
+Parameter       Name                Example
+
+-d              DNS                 my-web-app.com
+-e              Environment         qa

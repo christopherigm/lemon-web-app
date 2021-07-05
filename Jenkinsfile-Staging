@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Install dependencies') {
+            steps {
+                sh 'npm i'
+            }
+        }
+        stage('Build') {
+            environment {
+                PUBLIC_URL = ''
+                REACT_APP_BRANCH_NAME = sh(script: 'echo ${branchName}', , returnStdout: true).trim()
+                REACT_APP_API_URL='https://api.limon.iguzman.com.mx/v1/'
+            }
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'sudo chmod -R 777 /hdd/apps/staging/'
+                sh 'rm -rf /hdd/apps/staging/lemon-web-app'
+                sh 'cp -r build /hdd/apps/staging'
+                sh 'mv /hdd/apps/staging/build /hdd/apps/staging/lemon-web-app'
+                sh 'cp -r deploy /hdd/apps/staging/lemon-web-app'
+            }
+        }
+        stage('Build Mobile App') {
+            environment {
+                PUBLIC_URL = ''
+                REACT_APP_BRANCH_NAME = sh(script: 'echo ${branchName}', , returnStdout: true).trim()
+                REACT_APP_API_URL = 'https://api.limon.iguzman.com.mx/v1/'
+                REACT_APP_IS_MOBILE_APP = 'true'
+            }
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Builid Android App') {
+            steps {
+                sh 'rm -rf app'
+                sh 'cordova create app'
+                sh 'cp -r build app/'
+                sh 'rm -rf app/www'
+                sh 'mv app/build app/www'
+                sh './android/prepare-index.sh'
+                sh 'rm app/config.xml'
+                sh 'cp android/config.xml app/'
+                sh 'cp android/logo.jpg app/'
+                sh 'cp android/splash.jpg app/'
+                dir('app') {
+                    sh 'cordova platform add android'
+                    sh 'cordova plugin add cordova-plugin-device'
+                    sh 'cordova plugin add cordova-plugin-splashscreen'
+                    sh 'cordova build android'
+                }
+                sh 'cp app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /hdd/apps/staging/lemon-web-app/static/app.apk'
+                sh 'chmod 777 /hdd/apps/staging/lemon-web-app/static/app.apk'
+            }
+        }
+    }
+}

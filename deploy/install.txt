@@ -1,0 +1,9 @@
+How to use it
+
+$ ./install.sh [parameters]
+
+Parameter       Name                Example
+
+-d              DNS                 my-web-app.com
+-f              Folder              my-web-app
+-e              Environment         qa          
