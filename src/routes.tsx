@@ -10,6 +10,7 @@ import store, { persistor } from 'src/redux/store';
 import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
+import CategoryDetail from 'src/pages/category-detail/category-detail';
 
 const Routes = (): React.ReactElement => {
   return (
@@ -23,6 +24,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/about'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><About /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/:category">
+          <Provider store={store}>
+            <CategoryDetail />
           </Provider>
         </Route>
         <Route path='/'>

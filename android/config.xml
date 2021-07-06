@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="mx.com.iguzman.solefi" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Solefi</name>
+<widget id="mx.com.iguzman.limon" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Limón News</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Noticias para llevar
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="christopher.guzman.monsalvo@gmail.com" href="https://github.com/christopherigm/">
+        Christopher I Guzman Monsalvo
     </author>
     <content src="index.html" />
     <access origin="*" />

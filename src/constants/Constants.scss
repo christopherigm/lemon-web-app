@@ -1,3 +1,5 @@
+@import 'materialize-css';
+
 $title-font-size: 2.3em;
 $title-font-weight: 400;
 $subtitle-font-size: 1.3em;
@@ -13,3 +15,12 @@ $icons-size: 2.3em;
 
 // Colors
 $white: white;
+
+.lemon-black {
+  background-color: #000103;
+}
+
+html,
+body {
+  @extend .grey, .darken-4;
+}
