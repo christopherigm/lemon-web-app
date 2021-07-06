@@ -9,7 +9,7 @@ const Footer = (): React.ReactElement => {
   const system = useSelector((state: any) => state.system);
 
   return (
-    <footer className='page-footer blue Footer'>
+    <footer className='page-footer light-green darken-1 Footer'>
       <div className='footer-copyright Footer__copyright'>
         <div className='container'>
           <span>V. {env.version} ({system.platform.os} - {env.branchName} build) </span>

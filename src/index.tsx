@@ -22,6 +22,7 @@ import 'swiper/components/effect-cube/effect-cube.scss';
 import 'swiper/components/effect-fade/effect-fade.scss';
 import 'swiper/components/effect-flip/effect-flip.scss';
 // import reportWebVitals from './reportWebVitals';
+import 'src/constants/Constants.scss';
 
 ReactDOM.render(
   <React.StrictMode>
