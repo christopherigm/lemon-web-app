@@ -10,19 +10,13 @@ const CategoryDetail = (): React.ReactElement => {
   const categories = useSelector((state: any) => state.categories);
   const params: any = useParams();
   const categoryParameter = params.category || null;
-  if ( !categoryParameter ) return <div className='white-text'>Error de categoria</div>;
-  const categoryResults = categories.data ?
-    categories.data.filter((i: any) => i.attributes.slug === categoryParameter) :
-    null;
-  if ( !categoryResults.length ) return <div className='white-text'>Error de categoria</div>;
-  const category = categoryResults[0];
 
   return (
     <>
       <NavBar />
       <HorizontalSpace size='large' />
       <div className='white-text'>
-        Categoria {category.attributes.title}
+        Categoria {categoryParameter}{categories.length}
       </div>
       <HorizontalSpace size='large' />
       <Footer />

@@ -11,6 +11,7 @@ import Home from 'src/pages/home/home';
 import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
 import CategoryDetail from 'src/pages/category-detail/category-detail';
+import PostDetail from 'src/pages/post-detail/post-detail';
 
 const Routes = (): React.ReactElement => {
   return (
@@ -24,6 +25,11 @@ const Routes = (): React.ReactElement => {
         <Route path='/about'>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}><About /></PersistGate>
+          </Provider>
+        </Route>
+        <Route path="/:category/:post">
+          <Provider store={store}>
+            <PostDetail />
           </Provider>
         </Route>
         <Route path="/:category">
