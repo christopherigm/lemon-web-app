@@ -8,17 +8,28 @@ import NavBar from 'src/modules/nav-bar/nav-bar';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import Footer from 'src/modules/footer/footer';
 import fetchData from 'src/modules/utils/fetch-data';
+import HeaderPost from 'src/modules/header-post/header-post';
+import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
+import PostContent from 'src/modules/post-content/post-content';
+import PostAuthorBiography from 'src/modules/post-author-biography/post-author-biography';
 
 const postObject = {
   attributes: {
     title: '',
-    img_picture: ''
+    img_picture: '',
+    created: '',
+    description: ''
   },
   relationships: {
     author: {
       data: {
         attributes: {
-          first_name: ''
+          first_name: '',
+          last_name: '',
+          profile: {
+            img_picture: '',
+            biography: ''
+          }
         }
       }
     },
@@ -31,6 +42,7 @@ const postObject = {
     }
   }
 };
+
 
 const PostDetail = (): React.ReactElement => {
   const params: any = useParams();
@@ -51,18 +63,30 @@ const PostDetail = (): React.ReactElement => {
       });
   }, [fetchData]);
 
+
   return (
     <>
       <NavBar />
-      <HorizontalSpace size='large' />
+      <PostHeaderPicture image={post.attributes.img_picture}/>
+      <br /><br />
       <div className='white-text'>
-        {post.attributes.title}
-        <img src={post.attributes.img_picture} />
-        Author: {post.relationships.author.data.attributes.first_name}
-        <br />
-        Categoria: {post.relationships.category.data.attributes.title}
+        <HeaderPost
+          category={post.relationships.category.data.attributes.title}
+          title={post.attributes.title}
+          profile_picture={post.relationships.author.data.attributes.profile.img_picture}
+          first_name={post.relationships.author.data.attributes.first_name}
+          last_name={post.relationships.author.data.attributes.last_name}
+          date={post.attributes.created}
+        />
+        <PostContent description={post.attributes.description}/>
+        <HorizontalSpace size='medium' />
+        <PostAuthorBiography
+          profile_picture={post.relationships.author.data.attributes.profile.img_picture}
+          first_name={post.relationships.author.data.attributes.first_name}
+          last_name={post.relationships.author.data.attributes.last_name}
+          biography={post.relationships.author.data.attributes.profile.biography}
+        />
       </div>
-      <HorizontalSpace size='large' />
       <Footer />
       <SystemCheck />
     </>

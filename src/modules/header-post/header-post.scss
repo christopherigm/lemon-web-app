@@ -1,0 +1,33 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.PostAuthor {
+
+  &__title {
+    height: 50px;
+    font-size: $title-font-size;
+  }
+  
+  &__category {
+    font-size: $medium-text;
+    font-weight: $slim-font-weight;
+  }
+
+  &__author-name {
+    font-size: $medium-text;
+    font-weight: $medium-font-weight;
+  }
+
+  &__date {
+    font-size: $medium-text;
+    font-weight: $slim-font-weight;
+  }
+
+  &__info img {
+    width: 45px;
+    height: 45px;
+    border-radius: 22.5px;
+    display: block;
+    position: relative;
+  }
+}

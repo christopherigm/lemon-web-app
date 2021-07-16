@@ -15,7 +15,7 @@ class EnvironmentVariables {
 
   constructor() {
     this._apiBaseUrl = REACT_APP_API_URL ?
-      REACT_APP_API_URL : 'https://api.solefi.longmont.iguzman.com.mx/v1/';
+      REACT_APP_API_URL : 'https://api.limon.iguzman.com.mx/v1/';
     this._isMobileApp = REACT_APP_IS_MOBILE_APP ? true : false;
     this._branchName = REACT_APP_BRANCH_NAME ? REACT_APP_BRANCH_NAME : 'local-branch';
     this._version = packageJSON ? packageJSON.version : '0.0.0';

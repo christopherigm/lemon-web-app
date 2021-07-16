@@ -1,0 +1,10 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.PostContent {
+  &__content {
+    height: auto;
+    font-size: $regular-text;
+    @extend .white-text;
+  }
+}

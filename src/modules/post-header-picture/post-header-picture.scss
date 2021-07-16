@@ -1,0 +1,22 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.parallax-container {
+  height: 32vh;
+  margin-top: 0;
+  z-index: 1;
+}
+
+div .parallax-container {
+  height: 32vh;
+}
+
+@media screen and (min-width: 601px) {
+  div .parallax-container {
+    height: 65vh;
+  }
+  .parallax-container .parallax {
+    height: 65vh;
+  }  
+}
+

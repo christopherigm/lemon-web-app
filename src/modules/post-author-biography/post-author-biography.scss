@@ -1,0 +1,37 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.PostBiography {
+  padding-top: 5px;
+  border-top: solid 2px white;
+  
+  &__image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__author-name {
+    font-size: $medium-text;
+    font-weight: $medium-font-weight;
+    padding: 0 0 0 15px;
+  }
+
+  &__biography {
+    font-size: $regular-text;
+    padding: 0 0 0 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .PostBiography {
+    &__biography {
+      padding: 0;
+    }
+    &__nameAuthor {
+      padding: 0;
+    }
+  }
+}
