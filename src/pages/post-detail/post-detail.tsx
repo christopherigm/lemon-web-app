@@ -12,6 +12,7 @@ import HeaderPost from 'src/modules/header-post/header-post';
 import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
 import PostContent from 'src/modules/post-content/post-content';
 import PostAuthorBiography from 'src/modules/post-author-biography/post-author-biography';
+import Hashtag from 'src/modules/post-content/Hashtag';
 
 const postObject = {
   attributes: {
@@ -39,6 +40,9 @@ const postObject = {
           title: ''
         }
       }
+    },
+    hashtags: {
+      data: ''
     }
   }
 };
@@ -79,6 +83,7 @@ const PostDetail = (): React.ReactElement => {
           date={post.attributes.created}
         />
         <PostContent description={post.attributes.description}/>
+        <Hashtag hashtag={post.relationships.hashtags.data}/>
         <HorizontalSpace size='medium' />
         <PostAuthorBiography
           profile_picture={post.relationships.author.data.attributes.profile.img_picture}
