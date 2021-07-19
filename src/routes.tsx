@@ -15,7 +15,7 @@ import PostDetail from 'src/pages/post-detail/post-detail';
 
 const Routes = (): React.ReactElement => {
   return (
-    <Router>
+    <Router forceRefresh={true}>
       <Switch>
         <Route path="/activate/:token">
           <Provider store={store}>

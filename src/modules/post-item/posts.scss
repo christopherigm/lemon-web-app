@@ -1,0 +1,22 @@
+@import 'materialize-css';
+@import 'src/constants/Constants.scss';
+
+.card {
+  border-radius: 15px !important;
+  box-shadow: 0 white !important;
+
+  .card-image img {
+    height: 200px;
+    background-position: center;
+    border-radius: 15px 15px 0 0 !important;
+  }
+
+  .card-action{
+    border-radius: 15px !important;
+  }
+}
+
+.card:hover {
+  box-shadow: 0 0 5px 2px $fruit-salad !important;
+  transition: 0.25s;
+}
