@@ -22,7 +22,7 @@ done
 # $1 type -> nginx / supervisor
 PopulateFile () {
     file_name="$dns.conf";
-    cp $1.conf $file_name;
+    cp "$1.conf" $file_name;
     chmod 775 $file_name;
     sed -i "s/DNS/$dns/g" $file_name;
     sed -i "s/ENVT/$envt/g" $file_name;
@@ -31,13 +31,13 @@ PopulateFile () {
 
 if [ ! -n "$dns" ]
 then
-	echo "Error: DNS variable not provided: -d solefi.iguzman.com.mx";
+	echo "Error: DNS variable not provided: -d example.com";
     echo $show_help_message;
     exit 1;
 fi
 if [ ! -n "$folder" ]
 then
-	echo "Error: folder variable not provided: -f solefi";
+	echo "Error: folder variable not provided: -f web-app";
     echo $show_help_message;
     exit 1;
 fi
@@ -48,8 +48,8 @@ then
     exit 1;
 fi
 
-echo "Create Nginx configuration? (y/n)"
-read create
+echo "Create Nginx configuration? (y/n)";
+read create;
 
 if [ "$create" == "y" ]
 then
@@ -58,8 +58,8 @@ then
     echo "$file_name:";
     cat $file_name;
     echo "======================================";
-    echo "Deploy Nginx configuration? (y/n)"
-    read deploy
+    echo "Deploy Nginx configuration? (y/n)";
+    read deploy;
     if [ "$deploy" == "y" ]
     then
         sudo cp ./$file_name /etc/nginx/sites-available/;
@@ -67,8 +67,13 @@ then
         sudo nginx -t;
         sudo service nginx restart;
     fi
-    rm ./$file_name;
+    echo "Delete Nginx configuration? (y/n)"
+    read delete_file;
+    if [ "$delete_file" == "y" ]
+    then
+        rm "$file_name";
+    fi
 fi
 
-echo "Done"
+echo "Done";
 exit 0;
