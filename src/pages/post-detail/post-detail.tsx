@@ -9,9 +9,10 @@ import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
 import Footer from 'src/modules/footer/footer';
 import fetchData from 'src/modules/utils/fetch-data';
 import HeaderPost from 'src/modules/header-post/header-post';
-import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
 import PostContent from 'src/modules/post-content/post-content';
+import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
 import PostAuthorBiography from 'src/modules/post-author-biography/post-author-biography';
+
 
 const postObject = {
   attributes: {
@@ -87,6 +88,7 @@ const PostDetail = (): React.ReactElement => {
           biography={post.relationships.author.data.attributes.profile.biography}
         />
       </div>
+      <HorizontalSpace size='large' />
       <Footer />
       <SystemCheck />
     </>
