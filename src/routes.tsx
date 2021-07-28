@@ -12,10 +12,14 @@ import About from 'src/pages/about/about';
 import ActivateUser from 'src/pages/activate-user/activate-user';
 import CategoryDetail from 'src/pages/category-detail/category-detail';
 import PostDetail from 'src/pages/post-detail/post-detail';
+import EnvironmentVariables from 'src/constants/EnvironmentVariables';
+
+const env = EnvironmentVariables.getInstance();
+const isMobileApp = env.isMobileApp;
 
 const Routes = (): React.ReactElement => {
   return (
-    <Router forceRefresh={true}>
+    <Router forceRefresh={!isMobileApp}>
       <Switch>
         <Route path="/activate/:token">
           <Provider store={store}>

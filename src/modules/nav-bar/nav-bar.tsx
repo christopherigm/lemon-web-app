@@ -15,13 +15,13 @@ import SideMenu from 'src/modules/nav-bar/side-menu';
 import CategoriesMenu from 'src/modules/nav-bar/categories-menu';
 
 const categoriesURL = 'categories/?include=hashtag&sort=-order';
+const logoFile = '/assets/logo.jpg';
 
 const NavBar = (): React.ReactElement => {
   const dispatch = useDispatch();
   const categories = useSelector((state: any) => state.categories);
   const system = useSelector((state: any) => state.system);
   const prefix = system.platform.prefix;
-  const logoFile = '/logo.jpg';
   const logoURL = `${prefix}${logoFile}`;
   const sideNavRef: any = useRef(null);
 

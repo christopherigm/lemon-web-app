@@ -1,4 +1,5 @@
-const assignObject = ( object: any, included: any ): any => {
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+const assignObject = ( object, included ) => {
   const id = object.id;
   const type = object.type;
   for (const i of included) {
@@ -7,7 +8,7 @@ const assignObject = ( object: any, included: any ): any => {
   return object;
 };
 
-const checkObject = ( element: any, included: any): any => {
+const checkObject = ( element, included) => {
   if ( !included ) return element;
   if ( Array.isArray(element.data) ) {
     for (let j = 0; j < element.data.length; j++) {
@@ -25,7 +26,7 @@ const checkObject = ( element: any, included: any): any => {
   return element;
 };
 
-const rebuildObject = ( relationships: any, included: any ): any => {
+const rebuildObject = ( relationships, included ) => {
   for (const i in relationships) {
     if (Object.prototype.hasOwnProperty.call(relationships, i)) {
       relationships[i] = checkObject(relationships[i], included);
@@ -34,9 +35,9 @@ const rebuildObject = ( relationships: any, included: any ): any => {
   return relationships;
 };
 
-const rebuildData = ( d: any ): any => {
-  const data: any = { ...d };
-  const included: any = data.included;
+const rebuildData = ( d ) => {
+  const data = { ...d };
+  const included = data.included;
   if ( Array.isArray(data.data) ) {
     for (let i = 0; i < data.data.length; i++) {
       data.data[i].relationships = rebuildObject(data.data[i].relationships, included);
@@ -46,4 +47,4 @@ const rebuildData = ( d: any ): any => {
   return data;
 };
 
-export default rebuildData;
+module.exports = rebuildData;

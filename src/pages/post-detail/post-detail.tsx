@@ -12,7 +12,10 @@ import HeaderPost from 'src/modules/header-post/header-post';
 import PostContent from 'src/modules/post-content/post-content';
 import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
 import PostAuthorBiography from 'src/modules/post-author-biography/post-author-biography';
+import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 
+const env = EnvironmentVariables.getInstance();
+const isProduction = env.production;
 
 const postObject = {
   attributes: {
@@ -44,12 +47,15 @@ const postObject = {
   }
 };
 
-
 const PostDetail = (): React.ReactElement => {
   const params: any = useParams();
   const [post, setPost]: any = useState(postObject);
 
   useEffect(() => {
+    if ( isProduction ) {
+      const data = document.getElementById('data')?.innerHTML || '{ post: null }';
+      return setPost(JSON.parse(data));
+    }
     fetchData(`posts?filter[slug]=${params.post}&include=category,author,hashtags`)
       .then((response: any) => {
         if ( response.length === 0 ) {
@@ -64,31 +70,39 @@ const PostDetail = (): React.ReactElement => {
       });
   }, [fetchData]);
 
-
   return (
     <>
       <NavBar />
-      <PostHeaderPicture image={post.attributes.img_picture}/>
-      <br /><br />
-      <div className='white-text'>
-        <HeaderPost
-          category={post.relationships.category.data.attributes.title}
-          title={post.attributes.title}
-          profile_picture={post.relationships.author.data.attributes.profile.img_picture}
-          first_name={post.relationships.author.data.attributes.first_name}
-          last_name={post.relationships.author.data.attributes.last_name}
-          date={post.attributes.created}
-        />
-        <PostContent description={post.attributes.description}/>
-        <HorizontalSpace size='medium' />
-        <PostAuthorBiography
-          profile_picture={post.relationships.author.data.attributes.profile.img_picture}
-          first_name={post.relationships.author.data.attributes.first_name}
-          last_name={post.relationships.author.data.attributes.last_name}
-          biography={post.relationships.author.data.attributes.profile.biography}
-        />
-      </div>
-      <HorizontalSpace size='large' />
+      {
+        post && post.attributes && post.relationships ?
+        <>
+          <PostHeaderPicture image={post.attributes.img_picture}/>
+          <br /><br />
+          <div className='white-text'>
+            <HeaderPost
+              category={post.relationships.category.data.attributes.title}
+              title={post.attributes.title}
+              profile_picture={post.relationships.author.data.attributes.profile.img_picture}
+              first_name={post.relationships.author.data.attributes.first_name}
+              last_name={post.relationships.author.data.attributes.last_name}
+              date={post.attributes.created}
+            />
+            <PostContent description={post.attributes.description}/>
+            <HorizontalSpace size='medium' />
+            <PostAuthorBiography
+              profile_picture={post.relationships.author.data.attributes.profile.img_picture}
+              first_name={post.relationships.author.data.attributes.first_name}
+              last_name={post.relationships.author.data.attributes.last_name}
+              biography={post.relationships.author.data.attributes.profile.biography}
+            />
+          </div>
+          <HorizontalSpace size='large' />
+        </> : <>
+          <HorizontalSpace size='large' />
+          <span className='white-text'>Noticia {params.post} no encontrada :(</span>
+          <HorizontalSpace size='large' />
+        </>
+      }
       <Footer />
       <SystemCheck />
     </>

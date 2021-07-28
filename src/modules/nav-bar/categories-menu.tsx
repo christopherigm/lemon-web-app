@@ -12,7 +12,7 @@ const CategoriesMenu = ( props: any ): React.ReactElement => {
             <li key={index}>
               <Link
                 className='white-text'
-                to={item.attributes.slug}>
+                to={`/${item.attributes.slug}`}>
                 {item.attributes.title}
               </Link>
             </li>
