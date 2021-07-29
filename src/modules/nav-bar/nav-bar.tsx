@@ -69,7 +69,8 @@ const NavBar = (): React.ReactElement => {
       <SideMenu
         sideNavRef={sideNavRef}
         closeSideNav={closeSideNav}
-        categories={categories}/>
+        categories={categories}
+        logo={logoURL} />
     </>
   );
 };
