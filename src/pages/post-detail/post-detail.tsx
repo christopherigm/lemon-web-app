@@ -12,6 +12,7 @@ import HeaderPost from 'src/modules/header-post/header-post';
 import PostContent from 'src/modules/post-content/post-content';
 import PostHeaderPicture from 'src/modules/post-header-picture/post-header-picture';
 import PostAuthorBiography from 'src/modules/post-author-biography/post-author-biography';
+import Hashtags from 'src/modules/hashtag/hashtags';
 import EnvironmentVariables from 'src/constants/EnvironmentVariables';
 
 const env = EnvironmentVariables.getInstance();
@@ -95,6 +96,7 @@ const PostDetail = (): React.ReactElement => {
               last_name={post.relationships.author.data.attributes.last_name}
               biography={post.relationships.author.data.attributes.profile.biography}
             />
+            <Hashtags/>
           </div>
           <HorizontalSpace size='large' />
         </> : <>
