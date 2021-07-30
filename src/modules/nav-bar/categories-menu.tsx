@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 const CategoriesMenu = ( props: any ): React.ReactElement => {
   return (
     <>
+      <li>
+        <em
+          className='SideNavBar__logo hide-on-large-only'style={{
+          backgroundImage: `url(${props.logo})`
+        }}></em>
+      </li>
       {
         props.items ?
         props.items.map((item: any, index: any) => {

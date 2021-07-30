@@ -8,7 +8,9 @@ const SideMenu = ( props: any ): React.ReactElement => {
       id='mobile-demo'
       ref={props.sideNavRef}
       onClick={props.closeSideNav}>
-      <CategoriesMenu items={props.categories.data}/>
+      <CategoriesMenu
+        items={props.categories.data}
+        logo={props.logo}/>
     </ul>
   );
 };

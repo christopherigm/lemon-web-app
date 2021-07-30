@@ -2,7 +2,10 @@ import React, {
   useEffect,
   useState
 } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  useParams,
+  useHistory
+} from 'react-router-dom';
 import SystemCheck from 'src/modules/system-check/system-check';
 import NavBar from 'src/modules/nav-bar/nav-bar';
 import HorizontalSpace from 'src/modules/horizontal-space/horizontal-space';
@@ -48,21 +51,26 @@ const postObject = {
 };
 
 const PostDetail = (): React.ReactElement => {
+  const history = useHistory();
   const params: any = useParams();
   const [post, setPost]: any = useState(postObject);
 
   useEffect(() => {
     if ( isProduction ) {
-      const data = document.getElementById('data')?.innerHTML || '{ post: null }';
-      return setPost(JSON.parse(data));
+      const data: any = document.getElementById('data')?.innerHTML || '{ post: null }';
+      const postData = JSON.parse(data);
+      if ( !postData || !postData.attributes ) return history.replace('/');
+      return setPost(postData);
     }
     fetchData(`posts?filter[slug]=${params.post}&include=category,author,hashtags`)
       .then((response: any) => {
         if ( response.length === 0 ) {
           console.log('Error, noticia no existe');
         } else {
-          setPost(response.data[0]);
-          console.log('Noticia:', response.data[0]);
+          const postData = response.data[0];
+          if ( !postData ) return history.replace('/');
+          setPost(postData);
+          console.log('Noticia:', postData);
         }
       })
       .catch((error) => {
