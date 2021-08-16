@@ -79,7 +79,7 @@ then
     if [ "$deploy" == "y" ]
     then
         sudo cp ./$file_name /etc/nginx/sites-available/;
-        sudo ln -s /etc/nginx/sites-available/$file_name /etc/nginx/sites-enabled/;
+        sudo ln -s /etc/nginx/sites-available/$file_name_alone /etc/nginx/sites-enabled/;
         sudo nginx -t;
         sudo service nginx restart;
     fi
